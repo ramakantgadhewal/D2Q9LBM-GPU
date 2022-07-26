@@ -1,0 +1,11 @@
+2021/07/30: D3Q27 LBM implemented, can adapt to high resolution grids
+2021/08/05: Code structure changed, use CMake instead of Makefile
+2021/08/07: MRT implemented
+2021/08/08: Add cleanBuild.sh
+2021/08/09: Hybrid complie implemented. (Hybrid compile (g++ and nvcc) is used because nvcc does 
+            not support eigen well, each time Eigen is included in nvcc, lots of warning will 
+            occur and impact debugging.)
+2021/08/09: Only need to cmake .. from root build file
+2021/08/11: Code structure changed to be more reasonable, support using one CMakeFile to compile 
+            different projects. Readme.md added
+2021/09/03: 3D LBM D3Q27 OversetGrid accomplished. 

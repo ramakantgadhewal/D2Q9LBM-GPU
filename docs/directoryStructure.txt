@@ -1,0 +1,16 @@
+root
+|- src
+|  |- cudaLib
+|  |  |- basic
+|  |  |- kernels
+|  |  |- kernelsOverset
+|  |
+|  |- test
+|  |
+|  |- src
+
+
+|- 3rdLibs
+|  |- Eigen
+
+

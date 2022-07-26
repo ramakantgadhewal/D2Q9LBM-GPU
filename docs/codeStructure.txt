@@ -1,0 +1,22 @@
+Code structure for moving overset grid:
+
+1. The matrixes are solved using Eigen, stored in matrixSolver. However, we do not want to call 
+matrixSolver in directly in the cuda kernel, because cuda and Eigen do not compact well. So we 
+first copy the solved matrixes in matrixSolver to solver, then copy datas from cpu to gpu, and use 
+them in the kernel. 
+
+2. All matrixes except rotation matrix are stored in solver, which is stored in fluid. 
+
+3. One solver corresponds to one fluid, they are all stored in pointer lists.
+
+4. Coarse-Fine interpolate: Perform a stream operation to all the datas, the points which have 
+some non-streamed directions (the boundary cannot be streamed) will be interpolated. 
+
+5. Fine-Coarse interpolate: Perform a stream operation to all the datas, the points which have 
+some non-streamed directions will be interpolated. Need "status_invalid".
+
+6. In coarse->fine interpolation, we need to perform "fa,r = fa - (fa(eq) - fr(eq))". fa,r means
+the relative f from static coordinate, to obtain it, we need to subtract fa (f from static 
+coordinate) by fa(eq) and fr(eq).
+
+7. Remined that the code will break if v > 2.6, and is stable below that range.
